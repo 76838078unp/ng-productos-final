@@ -1,0 +1,12 @@
+.h-100{
+    min-height: 100vh;
+}
+
+.bg-login{
+    background-color: #1e8a22;
+}
+
+.card{
+    min-width: 400px;
+    border-radius: 20px;
+}

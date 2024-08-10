@@ -1,0 +1,10 @@
+.body{
+    background-color: rgb(30, 138, 34,0.9);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer{
+    margin-top: auto;
+}

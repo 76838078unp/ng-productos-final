@@ -10,6 +10,8 @@ import { SalidaProductoComponent } from './pages/salida-producto/salida-producto
 import { AgregarProductoComponent } from './pages/agregar-producto/agregar-producto.component';
 import { VerProductoComponent } from './pages/ver-producto/ver-producto.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LayoutsModule } from './layouts/layouts.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LayoutsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

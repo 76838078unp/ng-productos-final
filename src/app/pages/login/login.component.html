@@ -1,9 +1,10 @@
-<div class="h-100 d-flex justify-content-center">
+<div class="h-100 d-flex justify-content-center align-items-center bg-login">
     <div class="card">
-        <div class="card-header">
-            <h3>Iniciar Sesion</h3>
-        </div>
-        <div class="card-body">
+        
+        <div class="card-body p-5">
+            <div class="card-title text-center">
+                <h3>Iniciar Sesion</h3>
+            </div>
             <form [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="form-group my-2">
                     <label for="email">Email</label>
@@ -15,7 +16,7 @@
                     <input type="password" formControlName="password" class="form-control" id="password" placeholder="Password">
                    
                 </div>
-                <div class="text-center">
+                <div class="text-center mt-3">
                     <button type="submit" class="btn btn-success ">Ingresar</button>
                 </div>
                 

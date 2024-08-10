@@ -9,6 +9,7 @@ import { IngresoProductoComponent } from './pages/ingreso-producto/ingreso-produ
 import { SalidaProductoComponent } from './pages/salida-producto/salida-producto.component';
 import { AgregarProductoComponent } from './pages/agregar-producto/agregar-producto.component';
 import { VerProductoComponent } from './pages/ver-producto/ver-producto.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { VerProductoComponent } from './pages/ver-producto/ver-producto.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

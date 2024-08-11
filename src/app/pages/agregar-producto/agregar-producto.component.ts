@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CategoriaModel, ProductoModel } from 'src/app/models/producto.model';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -13,7 +14,8 @@ export class AgregarProductoComponent implements OnInit {
   categorias: CategoriaModel[] = []
 
   constructor(
-    private productoService: ProductoService
+    private productoService: ProductoService,
+    private router: Router
   ){
     this.productoForm = new FormGroup({
       nombre: new FormControl(''),
@@ -50,6 +52,7 @@ export class AgregarProductoComponent implements OnInit {
           return
         }
         alert('Producto registrado correctamente')
+        this.router.navigate(['/admin/products'])
       },
       err=>{
         alert('Error al registrar el producto')

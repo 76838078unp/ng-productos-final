@@ -28,15 +28,15 @@
                     <td>{{producto.stock}}</td>
                     <td>{{producto.precio_venta}}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary m-1">
+                        <a class="btn btn-sm btn-primary m-1" routerLink="/admin/products/{{producto.id_producto}}">
                             Ver
-                        </button>
-                        <button class="btn btn-sm btn-success m-1">
+                        </a>
+                        <a class="btn btn-sm btn-success m-1" routerLink="/admin/products/ingreso/{{producto.id_producto}}">
                             Ingreso
-                        </button>
-                        <button class="btn btn-sm btn-danger m-1">
+                        </a>
+                        <a class="btn btn-sm btn-danger m-1" routerLink="/admin/products/salida/{{producto.id_producto}}">
                             Salida
-                        </button>
+                        </a>
                     </td>
                 </tr>
             </tbody>

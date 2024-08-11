@@ -1,1 +1,27 @@
-<p>ingreso-producto works!</p>
+<div class="card mt-2">
+    <div class="card-header text-center bg-primary text-white">
+         <h3>
+            Registrar Ingreso de Producto 
+         </h3>
+        
+    </div>
+    <div class="card-body">
+        <button class="btn btn-secondary mb-2" routerLink="/admin/products">
+            Listado Producto
+        </button>
+
+        <form [formGroup]="formIngreso" (submit)="saveIngreso()">
+
+            <div class="form-group my-2">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" class="form-control" formControlName="cantidad" id="cantidad">
+            </div>
+            <div class="form-group my-2">
+                <label for="precio_compra">Precion de Compra</label>
+                <input type="number" class="form-control" formControlName="precio_compra" id="precio_compra">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Grabar Ingreso</button>
+        </form>
+    </div>
+</div>

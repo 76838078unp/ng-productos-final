@@ -1,1 +1,36 @@
-<p>ver-producto works!</p>
+<div class="card mt-2">
+    <div class="card-header text-center bg-primary text-white">
+         <h3>
+            Producto 
+         </h3>
+        
+    </div>
+    <div class="card-body">
+        <button class="btn btn-secondary mb-2" routerLink="/admin/products">
+            Listado Producto
+        </button>
+
+        <br>
+        <h3>Movimientos del producto</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Operacion</th>
+                    <th>Cantidad</th>
+                    <th>Precio Compra</th>
+                    <th>Precio Venta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let movement of movimientos">
+                    <td>{{ movement.idHistorial}}</td>
+                    <td>{{ movement.id_operacion }}</td>
+                    <td>{{ movement.cantidad  }}</td>
+                    <td>{{ movement.precio_compra | currency }}</td>
+                    <td>{{ movement.precio_venta | currency }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

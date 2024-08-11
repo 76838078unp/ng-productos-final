@@ -17,4 +17,8 @@ export class MovimientoService {
   getMovimientosAll(): Observable<ApiResModel<MovimientoModel[]>>{
     return this.httpClient.get<ApiResModel<MovimientoModel[]>>(this.url + 'verMovimientos')
   }
+
+  registrarMovimiento(movimiento: MovimientoModel): Observable<ApiResModel<MovimientoModel>>{
+    return this.httpClient.post<ApiResModel<MovimientoModel>>(this.url + 'grabaMovimiento', movimiento)
+  }
 }

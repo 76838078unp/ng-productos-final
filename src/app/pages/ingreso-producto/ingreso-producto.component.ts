@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MovimientoModel } from 'src/app/models/movimiento.model';
+import { MovimientoService } from 'src/app/services/movimiento.service';
 
 @Component({
   selector: 'app-ingreso-producto',
@@ -7,4 +11,47 @@ import { Component } from '@angular/core';
 })
 export class IngresoProductoComponent {
 
+  formIngreso: FormGroup;
+  productoId: number = 0
+
+  constructor(
+    private route: ActivatedRoute,
+    private movimientoService: MovimientoService,
+    private router: Router
+  ){
+    this.formIngreso = new FormGroup({
+      cantidad: new FormControl('', [Validators.required]),
+      precio_compra: new FormControl('', [Validators.required])
+    })
+    this.route.params.subscribe(
+      (params) => {
+        this.productoId = params['id']
+      }
+    )
+  }
+
+  saveIngreso(){
+    if(this.formIngreso.invalid){
+      alert('Formulario invalido')
+      return
+    }
+    let ingreso = this.formIngreso.value as MovimientoModel
+    ingreso.id_operacion  = 1
+    ingreso.id_producto = this.productoId
+    ingreso.precio_venta = 0
+
+    this.movimientoService.registrarMovimiento(ingreso).subscribe(
+      (res) => {
+        if(res.error){
+          alert(res.message)
+          return
+        }
+        alert('Ingreso registrado correctamente')
+        this.router.navigate(['/admin/products'])
+      },
+      err=>{
+        alert('Error al registrar el ingreso')
+      }
+    );
+  }
 }

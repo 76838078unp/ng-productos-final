@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BaseComponent } from 'src/app/layouts/BaseComponent';
 import { CategoriaModel, ProductoModel } from 'src/app/models/producto.model';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -9,7 +10,7 @@ import { ProductoService } from 'src/app/services/producto.service';
   templateUrl: './agregar-producto.component.html',
   styleUrls: ['./agregar-producto.component.css']
 })
-export class AgregarProductoComponent implements OnInit {
+export class AgregarProductoComponent extends BaseComponent implements OnInit {
   productoForm: FormGroup;
   categorias: CategoriaModel[] = []
 
@@ -17,12 +18,13 @@ export class AgregarProductoComponent implements OnInit {
     private productoService: ProductoService,
     private router: Router
   ){
+    super()
     this.productoForm = new FormGroup({
-      nombre: new FormControl(''),
-      id_categoria: new FormControl(''),
-      descripcion: new FormControl(''),
-      precio_venta: new FormControl(''),
-      stock: new FormControl(''),
+      nombre: new FormControl('', [Validators.required]),
+      id_categoria: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', [Validators.required]),
+      precio_venta: new FormControl('', [Validators.required]),
+      stock: new FormControl('', [Validators.required]),
     })
   }
 
@@ -30,7 +32,7 @@ export class AgregarProductoComponent implements OnInit {
     this.productoService.getCategoriasAll().subscribe(
       (res) => {
         if(res.error){
-          alert('Error al obtener las categorias')
+          this.showAlertError('Error al obtener las categorias')
           return
         }
         this.categorias = res.contenido
@@ -40,7 +42,7 @@ export class AgregarProductoComponent implements OnInit {
 
   guardarProducto(){
     if(this.productoForm.invalid){
-      alert('Formulario invalido')
+      this.showAlertError('Formulario invalido')
       return
     }
     let producto = this.productoForm.value as ProductoModel
@@ -48,14 +50,14 @@ export class AgregarProductoComponent implements OnInit {
     this.productoService.registrarProducto(producto).subscribe(
       (res) => {
         if(res.error){
-          alert(res.message)
+          this.showAlertError(res.message)
           return
         }
-        alert('Producto registrado correctamente')
+        this.showAlertSuccess('Producto registrado correctamente')
         this.router.navigate(['/admin/products'])
       },
       err=>{
-        alert('Error al registrar el producto')
+        this.showAlertError('Error al registrar el producto')
       }
     )
   }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BaseComponent } from 'src/app/layouts/BaseComponent';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { LoginService } from 'src/app/services/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent extends BaseComponent {
 
   loginForm: FormGroup;
 
@@ -16,6 +17,7 @@ export class LoginComponent {
     private router: Router,
     private loginService: LoginService
   ) { 
+    super()
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
@@ -24,7 +26,7 @@ export class LoginComponent {
 
   login() {
     if(this.loginForm.invalid){
-      alert("Complete todos los campos")
+      this.showAlertError("Complete todos los campos")
       return;
     }
     let isLoggin = this.loginService.login(
@@ -32,7 +34,7 @@ export class LoginComponent {
       this.loginForm.value.password
     )
     if(!isLoggin){
-      alert('Usuario o contraseña incorrecta')
+      this.showAlertError('Usuario o contraseña incorrecta')
       return
     }
     this.router.navigate(['/admin'])

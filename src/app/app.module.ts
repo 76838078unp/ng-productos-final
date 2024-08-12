@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutsModule } from './layouts/layouts.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from "./components/components.module";
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ComponentsModule } from "./components/components.module";
     ReactiveFormsModule,
     LayoutsModule,
     HttpClientModule,
-    ComponentsModule
+    ComponentsModule,
+    SweetAlert2Module.forRoot()
 ],
   providers: [],
   bootstrap: [AppComponent]

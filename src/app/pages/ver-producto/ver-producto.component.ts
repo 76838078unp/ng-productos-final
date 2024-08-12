@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BaseComponent } from 'src/app/layouts/BaseComponent';
 import { MovimientoModel } from 'src/app/models/movimiento.model';
 import { ProductoModel } from 'src/app/models/producto.model';
 import { MovimientoService } from 'src/app/services/movimiento.service';
@@ -10,7 +11,7 @@ import { ProductoService } from 'src/app/services/producto.service';
   templateUrl: './ver-producto.component.html',
   styleUrls: ['./ver-producto.component.css']
 })
-export class VerProductoComponent {
+export class VerProductoComponent extends BaseComponent{
   movimientos : MovimientoModel[] = []	
   productoId: number = 0
   producto?: ProductoModel 
@@ -19,6 +20,7 @@ export class VerProductoComponent {
     private movimientoService: MovimientoService,
     private productoService: ProductoService
   ){
+    super()
     this.route.params.subscribe(
       (params) => {
         this.productoId = params['id']
@@ -32,7 +34,7 @@ export class VerProductoComponent {
     this.productoService.getProductosAll().subscribe(
       (res) => {
         if(res.error){
-          alert('Error al obtener el producto')
+          this.showAlertError('Error al obtener el producto')
           return
         }
         let data_productos = res.contenido
@@ -45,7 +47,7 @@ export class VerProductoComponent {
     this.movimientoService.getMovimientosAll().subscribe(
       (res) => {
         if(res.error){
-          alert('Error al obtener los movimientos')
+          this.showAlertError('Error al obtener los movimientos')
           return
         }
         let data_movimientos = res.contenido

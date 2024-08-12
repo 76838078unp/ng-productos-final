@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BaseComponent } from 'src/app/layouts/BaseComponent';
 import { CategoriaModel, ProductoModel } from 'src/app/models/producto.model';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -7,12 +8,13 @@ import { ProductoService } from 'src/app/services/producto.service';
   templateUrl: './listado-producto.component.html',
   styleUrls: ['./listado-producto.component.css']
 })
-export class ListadoProductoComponent implements OnInit{
+export class ListadoProductoComponent extends BaseComponent implements OnInit {
   listProductos : ProductoModel[] = []
   categorias: CategoriaModel[] = []
   constructor(
     private productoService: ProductoService
   ){
+    super()
     this.getCategorias()
     this.getProductos()
   }
@@ -25,7 +27,7 @@ export class ListadoProductoComponent implements OnInit{
     this.productoService.getProductosAll().subscribe(
       res => {
         if (res.error){
-          alert(res.message)
+          this.showAlertError(res.message)
         }else{
           this.listProductos = res.contenido
         }
@@ -37,7 +39,7 @@ export class ListadoProductoComponent implements OnInit{
     this.productoService.getCategoriasAll().subscribe(
       res => {
         if (res.error){
-          alert(res.message)
+          this.showAlertError(res.message)
         }else{
           this.categorias = res.contenido
           

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BaseComponent } from 'src/app/layouts/BaseComponent';
 import { MovimientoModel } from 'src/app/models/movimiento.model';
 import { ProductoModel } from 'src/app/models/producto.model';
 import { MovimientoService } from 'src/app/services/movimiento.service';
@@ -11,7 +12,7 @@ import { ProductoService } from 'src/app/services/producto.service';
   templateUrl: './salida-producto.component.html',
   styleUrls: ['./salida-producto.component.css']
 })
-export class SalidaProductoComponent {
+export class SalidaProductoComponent extends BaseComponent{
   formSalida: FormGroup;
   productoId: number = 0
   producto?: ProductoModel
@@ -21,6 +22,7 @@ export class SalidaProductoComponent {
     private productoService: ProductoService,
     private router: Router
   ){
+    super()
     this.formSalida = new FormGroup({
       cantidad: new FormControl('', [Validators.required]),
       precio_venta: new FormControl('', [Validators.required])
@@ -37,21 +39,21 @@ export class SalidaProductoComponent {
     this.productoService.getProductosAll().subscribe(
       (res) => {
         if(res.error){
-          alert(res.message)
+          this.showAlertError(res.message)
           return
         }
         let productoData = res.contenido
         this.producto = productoData.find((producto) => producto.id_producto == this.productoId)
       },
       err => {
-        alert('Error al obtener el producto')
+        this.showAlertError('Error al obtener el producto')
       }
     )
   }
 
   saveSalida(){
     if(this.formSalida.invalid){
-      alert('Formulario invalido')
+      this.showAlertError('Formulario invalido')
       return
     }
     let ingreso = this.formSalida.value as MovimientoModel
@@ -62,14 +64,14 @@ export class SalidaProductoComponent {
     this.movimientoService.registrarMovimiento(ingreso).subscribe(
       (res) => {
         if(res.error){
-          alert(res.message)
+          this.showAlertError(res.message)
           return
         }
-        alert('Ingreso registrado correctamente')
+        this.showAlertSuccess('Ingreso registrado correctamente')
         this.router.navigate(['/admin/products'])
       },
       err=>{
-        alert('Error al registrar el ingreso')
+        this.showAlertError('Error al registrar el ingreso')
       }
     );
   }

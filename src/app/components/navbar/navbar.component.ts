@@ -23,6 +23,7 @@ export class NavbarComponent extends BaseComponent {
         if(result.isConfirmed){
           this.loginService.logout()
           this.router.navigate(['/'])
+          this.showAlertSuccess('Sesión cerrada')
         }
       }
     )

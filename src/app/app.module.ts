@@ -12,6 +12,7 @@ import { VerProductoComponent } from './pages/ver-producto/ver-producto.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutsModule } from './layouts/layouts.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ComponentsModule } from "./components/components.module";
 
 @NgModule({
   declarations: [
@@ -28,8 +29,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     ReactiveFormsModule,
     LayoutsModule,
-    HttpClientModule
-  ],
+    HttpClientModule,
+    ComponentsModule
+],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -9,5 +9,24 @@
         <button class="btn btn-secondary mb-2" routerLink="/admin/products">
             Listado Producto
         </button>
+        <app-producto-detail [producto]="producto"></app-producto-detail>
+
+        <form [formGroup]="formSalida" (submit)="saveSalida()">
+
+            <div class="form-group my-2">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" class="form-control" formControlName="cantidad" id="cantidad">
+            </div>
+            <div class="form-group my-2">
+                <label for="precio_venta">Precion de Venta</label>
+                
+                <div class="input-group mb-3">
+                    <span class="input-group-text">S/. </span>
+                    <input type="number" class="form-control" formControlName="precio_venta" id="precio_venta">
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Grabar Salida</button>
+        </form>
     </div>
 </div>

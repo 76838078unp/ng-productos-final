@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovimientoModel } from 'src/app/models/movimiento.model';
+import { ProductoModel } from 'src/app/models/producto.model';
 import { MovimientoService } from 'src/app/services/movimiento.service';
+import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
   selector: 'app-ingreso-producto',
@@ -13,10 +15,11 @@ export class IngresoProductoComponent {
 
   formIngreso: FormGroup;
   productoId: number = 0
-
+  producto?: ProductoModel
   constructor(
     private route: ActivatedRoute,
     private movimientoService: MovimientoService,
+    private productoService: ProductoService,
     private router: Router
   ){
     this.formIngreso = new FormGroup({
@@ -26,6 +29,23 @@ export class IngresoProductoComponent {
     this.route.params.subscribe(
       (params) => {
         this.productoId = params['id']
+        this.getProducto()
+      }
+    )
+  }
+
+  getProducto(){
+    this.productoService.getProductosAll().subscribe(
+      (res) => {
+        if(res.error){
+          alert(res.message)
+          return
+        }
+        let productoData = res.contenido
+        this.producto = productoData.find((producto) => producto.id_producto == this.productoId)
+      },
+      err => {
+        alert('Error al obtener el producto')
       }
     )
   }

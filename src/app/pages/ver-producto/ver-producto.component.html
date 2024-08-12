@@ -11,6 +11,8 @@
         </button>
 
         <br>
+        <app-producto-detail [producto]="producto"></app-producto-detail>
+        
         <h3>Movimientos del producto</h3>
         <table class="table table-bordered">
             <thead>
@@ -25,10 +27,17 @@
             <tbody>
                 <tr *ngFor="let movement of movimientos">
                     <td>{{ movement.idHistorial}}</td>
-                    <td>{{ movement.id_operacion }}</td>
+                    <td>
+                        <span class="badge bg-success" *ngIf="movement.id_operacion==1">
+                            Ingreso
+                        </span>
+                        <span class="badge bg-danger" *ngIf="movement.id_operacion==2">
+                            Salida
+                        </span>
+                    </td>
                     <td>{{ movement.cantidad  }}</td>
-                    <td>{{ movement.precio_compra | currency }}</td>
-                    <td>{{ movement.precio_venta | currency }}</td>
+                    <td class="text-end">S/. {{ movement.precio_compra }}</td>
+                    <td class="text-end">S/. {{ movement.precio_venta  }}</td>
                 </tr>
             </tbody>
         </table>

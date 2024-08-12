@@ -1,3 +1,3 @@
 export const environment = {
-    API_URL: 'https://api-maestria.softwarepiura.com/Api.php',
+    API_URL: 'http://apimaestria.sistemaspiura.com/Api.php',
 };

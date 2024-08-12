@@ -9,6 +9,8 @@
         <button class="btn btn-secondary mb-2" routerLink="/admin/products">
             Listado Producto
         </button>
+        <br>
+        <app-producto-detail [producto]="producto"></app-producto-detail>
 
         <form [formGroup]="formIngreso" (submit)="saveIngreso()">
 

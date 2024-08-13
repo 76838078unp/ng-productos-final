@@ -8,6 +8,8 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./admin-layout.component.css']
 })
 export class AdminLayoutComponent {
+  show: boolean = false;
+  count: number = 0;
 
   constructor(
     private loginService: LoginService,
@@ -17,6 +19,13 @@ export class AdminLayoutComponent {
     if(!user){
       this.router.navigate(['/'])
     }
+
+    this.loginService.spinnerEvent.subscribe(
+      (show:boolean)=>{
+        this.count = show ? this.count+1 : this.count-1;
+        this.show = (this.count>0);
+      }
+    )
   }
 
 

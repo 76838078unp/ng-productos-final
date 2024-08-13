@@ -38,6 +38,7 @@ export class LoginComponent extends BaseComponent {
       return
     }
     this.router.navigate(['/admin'])
+    this.showAlertSuccess('Bienvenido')
   }
 
 }

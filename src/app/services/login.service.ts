@@ -1,11 +1,20 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
+  public spinnerEvent: EventEmitter<boolean> = new EventEmitter();
+  
   constructor() { }
+
+  showSpinner(){
+    this.spinnerEvent.emit(true)
+  }
+  hideSpinner(){
+    this.spinnerEvent.emit(false)
+  }
 
   login(user: string, password: string){
     if(user == 'admin' && password == '123456'){

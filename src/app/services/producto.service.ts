@@ -28,6 +28,10 @@ export class ProductoService {
     return this.httpClient.post<ApiResModel<ProductoModel>>(this.url + 'grabaProducto', data)
   }
 
+  eliminarProducto(id: number): Observable<ApiResModel<any>>{
+    return this.httpClient.get<ApiResModel<any>>(this.url + 'eliminaProducto&id_producto=' + id)
+  }
+
 }
 
 

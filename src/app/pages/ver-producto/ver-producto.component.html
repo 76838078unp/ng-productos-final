@@ -12,7 +12,7 @@
 
         <br>
         <app-producto-detail [producto]="producto"></app-producto-detail>
-        
+        <br>
         <h3>Movimientos del producto</h3>
         <table class="table table-bordered">
             <thead>
@@ -20,8 +20,9 @@
                     <th>#</th>
                     <th>Operacion</th>
                     <th>Cantidad</th>
-                    <th>Precio Compra</th>
-                    <th>Precio Venta</th>
+                    <th class="text-end">Precio Compra Und.</th>
+                    <th class="text-end">Precio Venta Unid.</th>
+                    <th class="text-end">Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,9 +36,31 @@
                             Salida
                         </span>
                     </td>
-                    <td>{{ movement.cantidad  }}</td>
-                    <td class="text-end">S/. {{ movement.precio_compra }}</td>
-                    <td class="text-end">S/. {{ movement.precio_venta  }}</td>
+                    <td class="text-center">{{ movement.cantidad  }}</td>
+                    <td class="text-end">
+                        <span *ngIf="movement.id_operacion==1">
+                            S/. {{ movement.precio_compra  }}
+                        </span>
+                    </td>
+                    <td class="text-end">
+                        <span *ngIf="movement.id_operacion==2">
+                            S/. {{ movement.precio_venta  }}
+                        </span>
+                    </td>
+                    <td class="text-end fw-bold">
+                        <span *ngIf="movement.id_operacion==1" class="text-success">
+                            S/. {{ (movement?.cantidad||0) * (movement?.precio_compra ||0)  }}
+                        </span>
+                        <span *ngIf="movement.id_operacion==2" class="text-danger">
+                            S/. {{ (movement?.cantidad||0) * (movement?.precio_venta ||0)  }}
+                        </span>
+                    </td>
+                </tr>
+                <tr *ngIf="movimientos.length === 0">
+                    <td colspan="5" class="text-center">
+                        No hay movimientos registrados
+                    </td>
+
                 </tr>
             </tbody>
         </table>

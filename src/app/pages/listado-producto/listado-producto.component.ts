@@ -16,7 +16,7 @@ export class ListadoProductoComponent extends BaseComponent implements OnInit {
   ){
     super()
     this.getCategorias()
-    this.getProductos()
+    
   }
 
   ngOnInit(): void {
@@ -42,12 +42,36 @@ export class ListadoProductoComponent extends BaseComponent implements OnInit {
           this.showAlertError(res.message)
         }else{
           this.categorias = res.contenido
-          
+          this.getProductos()
         }
       }
     )
 
   }
 
+  eliminar(id: number){
+    this.questionAlert('¿Está seguro que desea eliminar el producto?').then(
+      (result) => {
+        if(result.isConfirmed){
+          this.productoService.eliminarProducto(id).subscribe(
+            res => {
+              if (res.error){
+                this.showAlertError(res.message)
+              }else{
+                this.getProductos()
+                this.showAlertSuccess('Producto eliminado')
+              } 
+            }
+          )
+        }
+      }
+    )
+    
+  }
+
+  getNameCategory(id: number){
+    let categoria = this.categorias.find(c => c.id_categoria == id)
+    return categoria?.categoria
+  }
   
 }

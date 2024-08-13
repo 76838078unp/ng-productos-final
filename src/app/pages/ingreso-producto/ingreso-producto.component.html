@@ -16,12 +16,20 @@
 
             <div class="form-group my-2">
                 <label for="cantidad">Cantidad</label>
-                <input type="number" class="form-control" formControlName="cantidad" id="cantidad">
+                <input type="number" class="form-control" formControlName="cantidad" id="cantidad" placeholder="0">
             </div>
             <div class="form-group my-2">
-                <label for="precio_compra">Precion de Compra</label>
-                <input type="number" class="form-control" formControlName="precio_compra" id="precio_compra">
+                <label for="precio_compra">Precio de Compra Unitario</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">S/. </span>
+                    <input type="number" class="form-control" formControlName="precio_compra" id="precio_compra" placeholder="0.0">
+                </div>
             </div>
+
+           <div class="text-end fw-bold">
+               <span> Subtotal: S/. {{ formIngreso.get('cantidad')?.value * formIngreso.get('precio_compra')?.value }}</span>
+
+           </div>
             <br>
             <button type="submit" class="btn btn-primary">Grabar Ingreso</button>
         </form>

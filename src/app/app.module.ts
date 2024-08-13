@@ -11,9 +11,10 @@ import { AgregarProductoComponent } from './pages/agregar-producto/agregar-produ
 import { VerProductoComponent } from './pages/ver-producto/ver-producto.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutsModule } from './layouts/layouts.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from "./components/components.module";
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { UrlsInterceptor } from './layouts/urls.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     ComponentsModule,
     SweetAlert2Module.forRoot()
 ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: UrlsInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

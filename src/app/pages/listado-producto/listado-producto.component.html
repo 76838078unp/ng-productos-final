@@ -24,7 +24,7 @@
                 <tr *ngFor="let producto of listProductos">
                     <td>{{producto.codigo}}</td>
                     <td>{{producto.nombre}}</td>
-                    <td>{{producto.id_categoria}}</td>
+                    <td>{{getNameCategory(producto.id_categoria)}}</td>
                     <td>{{producto.stock}}</td>
                     <td class="text-end">S/. {{producto.precio_venta}}</td>
                     <td>
@@ -37,6 +37,14 @@
                         <a class="btn btn-sm btn-danger m-1" routerLink="/admin/products/salida/{{producto.id_producto}}">
                             Salida
                         </a>
+                        <button class="btn btn-sm btn-danger m-1" (click)="eliminar(producto.id_producto || 0 )">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="listProductos.length === 0">
+                    <td colspan="6" class="text-center" >
+                        No hay productos registrados
                     </td>
                 </tr>
             </tbody>

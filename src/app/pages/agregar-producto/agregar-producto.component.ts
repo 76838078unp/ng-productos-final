@@ -10,7 +10,7 @@ import { ProductoService } from 'src/app/services/producto.service';
   templateUrl: './agregar-producto.component.html',
   styleUrls: ['./agregar-producto.component.css']
 })
-export class AgregarProductoComponent extends BaseComponent implements OnInit {
+export class AgregarProductoComponent extends BaseComponent {
   productoForm: FormGroup;
   categorias: CategoriaModel[] = []
 
@@ -23,12 +23,8 @@ export class AgregarProductoComponent extends BaseComponent implements OnInit {
       nombre: new FormControl('', [Validators.required]),
       id_categoria: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
-      precio_venta: new FormControl('', [Validators.required]),
-      stock: new FormControl('', [Validators.required]),
+      precio_venta: new FormControl('', [Validators.required])
     })
-  }
-
-  ngOnInit(): void {
     this.productoService.getCategoriasAll().subscribe(
       (res) => {
         if(res.error){
@@ -39,6 +35,7 @@ export class AgregarProductoComponent extends BaseComponent implements OnInit {
       }
     );
   }
+
 
   guardarProducto(){
     if(this.productoForm.invalid){

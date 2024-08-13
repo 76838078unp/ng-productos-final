@@ -44,6 +44,9 @@ export class SalidaProductoComponent extends BaseComponent{
         }
         let productoData = res.contenido
         this.producto = productoData.find((producto) => producto.id_producto == this.productoId)
+        this.formSalida.patchValue({
+          precio_venta: this.producto?.precio_venta || 0
+        })
       },
       err => {
         this.showAlertError('Error al obtener el producto')

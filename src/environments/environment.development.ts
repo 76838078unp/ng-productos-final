@@ -1,3 +1,3 @@
 export const environment = {
-    API_URL: 'http://localhost:82/Api.php',
+    API_URL: 'https://alonsodelcordova.com/Api.php',
 };
